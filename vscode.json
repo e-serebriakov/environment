@@ -8,16 +8,14 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontLigatures": true,
-  "editor.fontSize": 14,
+  "editor.fontSize": 12,
   "editor.fontWeight": "300",
   "editor.formatOnSave": true,
   "editor.gotoLocation.multipleDefinitions": "goto",
   "editor.inlineSuggest.enabled": true,
   "editor.renderLineHighlight": "none",
   "editor.renderWhitespace": "selection",
-  "editor.rulers": [
-    80
-  ],
+  "editor.rulers": [80],
   "editor.suggestSelection": "first",
   "editor.wordWrap": "on",
   "typescript.updateImportsOnFileMove.enabled": "always",
