@@ -1,0 +1,25 @@
+[color]
+  diff   = auto
+  status = auto
+  branch = auto
+[branch]
+  autosetuprebase = always
+[core]
+  autocrlf = input
+  hooksPath = /dev/null
+[init]
+  defaultBranch = main
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = true
+[push]
+  default = current
+  followtags = true
+[rerere]
+  enabled = true
+[diff]
+  external = difft
+  algorithm = histogram
+  colorMoved = true
+  indentHeuristic = true

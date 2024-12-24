@@ -1,0 +1,23 @@
+#!/bin/sh
+
+mkdir -p ~/.config/git
+
+cp -f ~/dotfiles/zshrc ~/.zshrc
+cp -f ~/dotfiles/gitconfig ~/.gitconfig
+cp -f ~/dotfiles/starship.toml ~/.config/starship.toml
+
+curl -sS https://starship.rs/install.sh > starship.sh
+chmod a+x starship.sh
+mkdir -p ~/.local/bin
+./starship.sh -y -b ~/.local/bin
+rm starship.sh
+
+mkdir -p ~/.local/share/zsh
+if command -v git >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
+  git clone -q https://github.com/zsh-users/zsh-syntax-highlighting \
+    ~/.local/share/zsh/zsh-syntax-highlighting
+  git clone -q https://github.com/zsh-users/zsh-history-substring-search \
+    ~/.local/share/zsh/zsh-history-substring-search
+  git clone https://github.com/zsh-users/zsh-autosuggestions \
+    ~/.local/share/zsh/zsh-autosuggestions
+fi

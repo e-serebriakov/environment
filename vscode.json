@@ -1,0 +1,115 @@
+{
+  "workbench.sideBar.location": "right",
+  "editor.minimap.enabled": false,
+  "editor.tabSize": 2,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.fontWeight": "300",
+  "editor.formatOnSave": true,
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.inlineSuggest.enabled": true,
+  "editor.renderLineHighlight": "none",
+  "editor.renderWhitespace": "selection",
+  "editor.rulers": [
+    80
+  ],
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "on",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
+  "vim.smartRelativeLine": true,
+  "color-highlight.markerType": "dot-after",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js, ${capture}.typegen.ts",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts, ${capture}.typegen.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml",
+    "*.mts": "${capture}.typegen.ts",
+    "*.cts": "${capture}.typegen.ts"
+  },
+  "githubPullRequests.pullBranch": "never",
+  "errorLens.excludeBySource": ["ts(2552)"],
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "svelte.enable-ts-plugin": true,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "gitlens.views.branches.branches.layout": "list",
+  "eslint.format.enable": true,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "cursor.cpp.disabledLanguages": ["plaintext", "markdown", "scminput"],
+  "workbench.colorTheme": "Default Dark Modern",
+  "git.autofetch": true,
+  "cSpell.enableFiletypes": ["shellscript"],
+  "cSpell.language": "en,ru",
+  "aws.telemetry": false,
+  "remote.autoForwardPortsSource": "hybrid",
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript][svelte][typescript][typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    }
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "vscode.markdown-language-features"
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[svelte]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "files.associations": {
+    "*.py": "python"
+  },
+  "dotfiles.installCommand": "devcontainer/install-dotfiles",
+  "dotfiles.repository": "e-serebriakov/environment"
+}
