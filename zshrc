@@ -30,7 +30,9 @@ alias gaa='git add --all'
 alias gc='git commit -v'
 alias gcm='git commit -m'
 alias gp='git push'
+alias ggp='git push origin $(current_branch)'
 alias gl='git pull'
+alias ggl='git pull origin $(current_branch)'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gm='git merge'
@@ -48,6 +50,7 @@ alias gsta='git stash'
 alias gstp='git stash pop'
 alias gsp='git show'
 alias gt='git tag'
+alias grh='git reset HEAD'
 
 # Prompt
 if command -v starship > /dev/null 2>&1; then
