@@ -7,7 +7,7 @@
     "source.fixAll": "never"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontLigatures": true,
+  "editor.fontLigatures": false,
   "editor.fontSize": 12,
   "editor.fontWeight": "300",
   "editor.formatOnSave": true,
