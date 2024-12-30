@@ -50,7 +50,7 @@ alias gsta='git stash'
 alias gstp='git stash pop'
 alias gsp='git show'
 alias gt='git tag'
-alias grh='git reset HEAD'
+alias grh='git reset'
 
 # Prompt
 if command -v starship > /dev/null 2>&1; then
