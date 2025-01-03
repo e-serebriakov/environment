@@ -8,8 +8,8 @@ cp -f ~/dotfiles/starship.toml ~/.config/starship.toml
 
 if ! command -v zsh >/dev/null 2>&1; then
   if command -v apt-get >/dev/null 2>&1; then
-    sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends zsh
-    sudo rm -rf /var/lib/apt/lists/*
+    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zsh
+    rm -rf /var/lib/apt/lists/*
   else
     echo "Could not install zsh: no supported package manager found"
     exit 1
@@ -17,10 +17,8 @@ if ! command -v zsh >/dev/null 2>&1; then
 fi
 
 # Set zsh as default shell
-if [ -f /bin/zsh ]; then
-  sudo chsh -s /bin/zsh $(whoami)
-elif [ -f /usr/bin/zsh ]; then
-  sudo chsh -s /usr/bin/zsh $(whoami)
+if [ -f /usr/bin/zsh ]; then
+  chsh -s /usr/bin/zsh $(whoami)
 fi
 
 curl -sS https://starship.rs/install.sh > starship.sh
