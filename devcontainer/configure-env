@@ -6,10 +6,20 @@ cp -f ~/dotfiles/zshrc ~/.zshrc
 cp -f ~/dotfiles/gitconfig ~/.gitconfig
 cp -f ~/dotfiles/starship.toml ~/.config/starship.toml
 
+# Check if we have sudo available
+if ! command -v sudo >/dev/null 2>&1; then
+  echo "Error: 'sudo' command is required but not available"
+  exit 1
+fi
+
 if ! command -v zsh >/dev/null 2>&1; then
   if command -v apt-get >/dev/null 2>&1; then
-    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zsh
-    rm -rf /var/lib/apt/lists/*
+    if ! sudo -n true 2>/dev/null; then
+      echo "Error: Need password-less sudo rights to install zsh"
+      exit 1
+    fi
+    sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends zsh
+    sudo rm -rf /var/lib/apt/lists/*
   else
     echo "Could not install zsh: no supported package manager found"
     exit 1
@@ -18,7 +28,11 @@ fi
 
 # Set zsh as default shell
 if [ -f /usr/bin/zsh ]; then
-  chsh -s /usr/bin/zsh $(whoami)
+  if ! sudo -n true 2>/dev/null; then
+    echo "Error: Need password-less sudo rights to change shell"
+    exit 1
+  fi
+  sudo chsh -s /usr/bin/zsh $(whoami)
 fi
 
 curl -sS https://starship.rs/install.sh > starship.sh
