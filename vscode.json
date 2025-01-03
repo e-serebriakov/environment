@@ -108,6 +108,6 @@
   "files.associations": {
     "*.py": "python"
   },
-  "dotfiles.installCommand": "devcontainer/install-dotfiles",
+  "dotfiles.installCommand": "devcontainer/configure-env",
   "dotfiles.repository": "e-serebriakov/environment"
 }
