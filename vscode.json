@@ -109,5 +109,6 @@
     "*.py": "python"
   },
   "dotfiles.installCommand": "devcontainer/configure-env",
-  "dotfiles.repository": "e-serebriakov/environment"
+  "dotfiles.repository": "e-serebriakov/environment",
+  "terminal.integrated.defaultProfile.linux": "zsh"
 }
