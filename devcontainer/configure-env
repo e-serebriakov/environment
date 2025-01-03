@@ -8,7 +8,7 @@ cp -f ~/dotfiles/starship.toml ~/.config/starship.toml
 
 if ! command -v zsh >/dev/null 2>&1; then
   if command -v apt-get >/dev/null 2>&1; then
-    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zsh
+    sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends zsh
   else
     echo "Could not install zsh: no supported package manager found"
     exit 1
