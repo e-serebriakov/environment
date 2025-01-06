@@ -10,7 +10,6 @@
   autosetuprebase = always
 [core]
   autocrlf = input
-  hooksPath = /dev/null
 [init]
   defaultBranch = main
 [gpg]
