@@ -1,52 +1,102 @@
 #!/bin/sh
 
-mkdir -p ~/.config/git
+# Constants
+ZSH_PLUGINS_DIR="$HOME/.local/share/zsh"
+CONFIG_DIR="$HOME/.config"
+DOTFILES_DIR="$HOME/dotfiles"
 
-cp -f ~/dotfiles/zshrc ~/.zshrc
-cp -f ~/dotfiles/gitconfig ~/.gitconfig
-cp -f ~/dotfiles/starship.toml ~/.config/starship.toml
-
-# Check if we have sudo available
-if ! command -v sudo >/dev/null 2>&1; then
-  echo "Error: 'sudo' command is required but not available"
+# Error handling
+error_exit() {
+  echo "Error: $1" >&2
   exit 1
-fi
+}
 
-if ! command -v zsh >/dev/null 2>&1; then
+# Package management helpers
+install_package() {
+  package_name="$1"
   if command -v apt-get >/dev/null 2>&1; then
-    if ! sudo -n true 2>/dev/null; then
-      echo "Error: Need password-less sudo rights to install zsh"
-      exit 1
-    fi
-    sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends zsh
+    check_passwordless_sudo
+    sudo apt-get update
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends "$package_name"
     sudo rm -rf /var/lib/apt/lists/*
   else
-    echo "Could not install zsh: no supported package manager found"
-    exit 1
+    error_exit "Could not install $package_name: apt-get is required"
   fi
-fi
+}
 
-# Set zsh as default shell
-if [ -f /usr/bin/zsh ]; then
+check_sudo() {
+  if ! command -v sudo >/dev/null 2>&1; then
+    error_exit "Error: 'sudo' command is required but not available"
+  fi
+}
+
+check_passwordless_sudo() {
   if ! sudo -n true 2>/dev/null; then
-    echo "Error: Need password-less sudo rights to change shell"
-    exit 1
+    error_exit "Error: Need password-less sudo rights for this operation"
   fi
-  sudo chsh -s /usr/bin/zsh $(whoami)
-fi
+}
 
-curl -sS https://starship.rs/install.sh > starship.sh
-chmod a+x starship.sh
-mkdir -p ~/.local/bin
-./starship.sh -y -b ~/.local/bin
-rm starship.sh
+# Copy configuration files
+setup_config_files() {
+  mkdir -p "$CONFIG_DIR/git"
+  cp -f "$DOTFILES_DIR/zshrc" "$HOME/.zshrc" || error_exit "Failed to copy zshrc"
+  cp -f "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig" || error_exit "Failed to copy gitconfig"
+  cp -f "$DOTFILES_DIR/starship.toml" "$CONFIG_DIR/starship.toml" || error_exit "Failed to copy starship.toml"
+}
 
-mkdir -p ~/.local/share/zsh
-if command -v git >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
-  git clone -q https://github.com/zsh-users/zsh-syntax-highlighting \
-    ~/.local/share/zsh/zsh-syntax-highlighting
-  git clone -q https://github.com/zsh-users/zsh-history-substring-search \
-    ~/.local/share/zsh/zsh-history-substring-search
-  git clone https://github.com/zsh-users/zsh-autosuggestions \
-    ~/.local/share/zsh/zsh-autosuggestions
-fi
+# Install and configure ZSH
+setup_zsh() {
+  if ! command -v zsh >/dev/null 2>&1; then
+    echo "Installing ZSH..."
+    install_package "zsh"
+  fi
+
+  # Set zsh as default shell
+  if [ -f /usr/bin/zsh ]; then
+    check_passwordless_sudo
+    sudo chsh -s /usr/bin/zsh "$(whoami)" || error_exit "Failed to set ZSH as default shell"
+  fi
+}
+
+# Install Starship prompt
+install_starship() {
+  echo "Installing Starship prompt..."
+  curl -sS https://starship.rs/install.sh > starship.sh || error_exit "Failed to download Starship installer"
+  chmod a+x starship.sh
+  mkdir -p "$HOME/.local/bin"
+  ./starship.sh -y -b "$HOME/.local/bin" || error_exit "Starship installation failed"
+  rm starship.sh
+}
+
+# Install ZSH plugins
+install_zsh_plugins() {
+  echo "Installing ZSH plugins..."
+  mkdir -p "$ZSH_PLUGINS_DIR"
+  if command -v git >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
+    for plugin in "zsh-syntax-highlighting" "zsh-history-substring-search" "zsh-autosuggestions"; do
+      if [ ! -d "$ZSH_PLUGINS_DIR/$plugin" ]; then
+        git clone -q "https://github.com/zsh-users/$plugin" \
+          "$ZSH_PLUGINS_DIR/$plugin" || error_exit "Failed to clone $plugin"
+        fi
+    done
+  fi
+}
+
+# Install Neovim
+install_neovim() {
+  if ! command -v nvim >/dev/null 2>&1; then
+    echo "Installing Neovim..."
+    install_package "neovim"
+  fi
+}
+
+main() {
+  check_sudo
+  setup_config_files
+  setup_zsh
+  install_starship
+  install_zsh_plugins
+  install_neovim
+}
+
+main
