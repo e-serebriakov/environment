@@ -42,4 +42,7 @@
   indentHeuristic = true
 
 [help]
-	autocorrect = 5
+  autocorrect = 5
+
+[tag]
+  gpgSign = true
