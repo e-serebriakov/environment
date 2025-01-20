@@ -23,7 +23,7 @@
   defaultBranch = main
 
 [gpg]
-  format = ssh
+	format = ssh
 
 [commit]
   gpgsign = true
@@ -43,6 +43,9 @@
 
 [help]
   autocorrect = 5
+
+[gpg "ssh"]
+	defaultKeyCommand = bash -c 'ssh-add -L | grep sign'
 
 [tag]
   gpgSign = true
