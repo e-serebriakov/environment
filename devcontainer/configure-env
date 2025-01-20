@@ -40,7 +40,7 @@ check_passwordless_sudo() {
 setup_config_files() {
   mkdir -p "$CONFIG_DIR/git"
   cp -f "$DOTFILES_DIR/zshrc" "$HOME/.zshrc" || error_exit "Failed to copy zshrc"
-  cp -f "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig" || error_exit "Failed to copy gitconfig"
+  # cp -f "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig" || error_exit "Failed to copy gitconfig"
   cp -f "$DOTFILES_DIR/starship.toml" "$CONFIG_DIR/starship.toml" || error_exit "Failed to copy starship.toml"
 }
 
