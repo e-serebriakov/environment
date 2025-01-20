@@ -90,12 +90,34 @@ install_neovim() {
   fi
 }
 
+# Configure SSH allowed signers
+setup_ssh_signers() {
+  echo "Setting up SSH allowed signers..."
+  
+  [ -d "$HOME/.ssh" ] || mkdir -p "$HOME/.ssh" || \
+    error_exit "Failed to create .ssh directory"
+  chmod 700 "$HOME/.ssh" || \
+    error_exit "Failed to set .ssh directory permissions"
+  
+  git_email=$(git config --get user.email) || \
+    error_exit "Failed to get git email"
+  
+  signing_key=$(ssh-add -L | grep sign) || \
+    error_exit "No signing keys found in ssh-agent. Please add your key with ssh-add"
+  
+  echo "$git_email $signing_key" > "$HOME/.ssh/allowed_signers" || \
+    error_exit "Failed to create allowed_signers file"
+  chmod 644 "$HOME/.ssh/allowed_signers" || \
+    error_exit "Failed to set allowed_signers file permissions"
+}
+
 main() {
   check_sudo
   setup_config_files
   setup_zsh
   install_starship
   install_zsh_plugins
+  setup_ssh_signers
   install_neovim
 }
 

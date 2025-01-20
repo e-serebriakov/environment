@@ -24,7 +24,6 @@
 
 [gpg]
 	format = ssh
-  allowedSignersFile = ~/.ssh/allowed_signers
 
 [commit]
   gpgsign = true
@@ -47,6 +46,7 @@
 
 [gpg "ssh"]
 	defaultKeyCommand = bash -c 'ssh-add -L | grep sign'
+  allowedSignersFile = ~/.ssh/allowed_signers
 
 [tag]
   gpgSign = true
